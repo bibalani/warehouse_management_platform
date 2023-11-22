@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href = "{% static 'css/style.css' %}">
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/d711256a25.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="navbar">
+    <div class="container navbar">
+      <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand" style="color:white" href="{% url 'my_app:index' %}">Home Page</a>
+           
+      </ul>
+      <a class="nav-link" style="color:white" href="{% url 'my_app:user_login' %}">Login</a>
+      <a class="nav-link" style="color:white" href="{% url 'my_app:register' %}">Signup</a>
+    </div>
+  </nav>
+  
+  <section id="title">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="left-row col-lg-6">
+          <div class="index_text">
+              <h1>Manange your drug warehouses via Drugstore Management System</h1>
+              <ul>
+                <li>Keep track of all shipments ...</li>
+                <li>Getting informed about updated inventory ...</li>
+                <li>Manage inventory in terms of drugstore and drug...</li>
+              </ul>
+          </div>
+        </div>  
+        
+        <div class="drugstore-image col-lg-6">
+            <img class="image-class" src="{% static 'image/pic1.png' %}" alt="drugstore-image">
+        </div>
+      </div>
+    </div>
+  </section>
+    
+      <section class="cta">
+        <h1>Make sure all you need to keep healthy and refresh is available!</h1>
+        <button type="button" class="btn btn-dark btn-lg download-button"><i class="fab fa-apple"></i> Download</button>
+        <button type="button" class="btn btn-outline-light btn-lg download-button"><i class="fab fa-google-play"></i>Download</button>
+      </section>
+    
+      <footer id="footer">
+        <i class="social-icon fab fa-linkedin"></i>
+        <p>© Copyright Morteza_Pouresmaeeli</p>
+      </footer>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+    
+  

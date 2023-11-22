@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% extends 'my_app/base.html' %}
+{% block head %}
+<title>Drugstore</title>
+{% endblock %}
+
+
+
+{% block body_block %}
+
+
+<div class="container">
+    <p>Please Order a Product</p>
+    <form id="order_form" method="POST">
+        {% csrf_token %}
+        {{ order_form.as_p }}
+        <label for="maximum_quantity">Maximum Quantity</label>
+        <br>
+        <input class="form-control readonly" type="text" name="" id="maximum_quantity" readonly>
+        <br>
+        
+        <input class="btn" type="submit" value="Create an Order" name="order_submit">
+    </form>
+    <br>
+    <br>
+</div>
+
+
+{% if order_list %}
+    <div class="container">        
+        <table id="order_info" class="table">
+            <thead>
+                <th>ID</th>
+                <th>Order Sequence</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+                <th>Source Warehouse</th>
+                <th>Destination Warehouse</th>
+            </thead>
+            {% for order in order_list %}
+            <tbody>
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.sequence }}</td>
+                    <td>{{ order.product }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.order_date | date:'Y-m-d' }}</td>
+                    <td>{{ order.source }}</td>
+                    <td>{{ order.destination }}</td>
+                </tr>
+            </tbody>
+
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+
+
+{% if movement_list %}
+    <div class="container">
+        <p>Your Movement List</p>        
+        <table id="movement_info" class="table">
+            <thead>
+                <th>ID</th>
+                <th>Quantity</th>
+                <th>Remain Quantity</th>
+                <th>Movement Date</th>
+                <th>Product</th>
+                <th>Order</th>
+                <th>Source Warehouse</th>
+                <th>Destination Warehouse</th>
+            </thead>
+            {% for movement in movement_list %}
+            <tbody>
+                <tr>
+                    <td>{{ movement.id }}</td>
+                    <td>{{ movement.quantity }}</td>
+                    <td>{{ movement.remain_quantity }}</td>
+                    <td>{{ movement.movement_date }}</td>
+                    <td>{{ movement.product }}</td>
+                    <td>{{ movement.order }}</td>
+                    <td>{{ movement.source }}</td>
+                    <td>{{ movement.destination }}</td>
+                </tr>
+            </tbody>
+
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}
+{% endblock %}
+
+
+{% block script %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#order_form').change(function(e){
+            e.preventDefault();
+
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'my_app:get_form_info' %}",
+                data: serializedData,
+                success: function(response){
+                    
+                    
+                    // var ser_current_inventory = JSON.parse(response['ser_current_inventory']);
+                    // alert(ser_current_inventory)
+                    
+                    var current_inventory_fields = response['ser_current_inventory']['current_inventory'];
+                    
+                    
+
+                    $('#maximum_quantity').val(current_inventory_fields)                                     
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            });            
+        });
+    });
+
+
+
+    $(document).ready(function(){
+        $('#order_form').submit(function(e){
+            e.preventDefault();
+
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'my_app:add_order_regular_customer' %}",
+                data: serializedData,
+                success: function(response){
+                    $('#order_form').trigger('reset');
+
+                    var ser_order = JSON.parse(response['ser_order']);
+                    var order_fields = ser_order[0]['fields'];
+                    
+                    var ser_movement = JSON.parse(response['ser_movement'])
+                    var movement_fields = ser_movement[0]['fields'];
+
+                    $('#order_info tbody').prepend(
+                        `<tr>
+                        <td>${order_fields["id"]||""}</td>
+                        <td>${order_fields["sequence"]||""}</td>
+                        <td>${order_fields["product"]||""}</td>
+                        <td>${order_fields["quantity"]||""}</td>
+                        <td>${order_fields["order_date"]||""}</td>
+                        <td>${order_fields["source"]||""}</td>
+                        <td>${order_fields["destination"]||""}</td>
+                        
+                        </tr>`
+                    )
+                    $('#movement_info tbody').prepend(
+                        `<tr>
+                        <td>${movement_fields["id"]||""}</td>
+                        <td>${movement_fields["quantity"]||""}</td>
+                        <td>${movement_fields["remain_quantity"]||""}</td>
+                        <td>${movement_fields["movement_date"]||""}</td>
+                        <td>${movement_fields["product"]||""}</td>
+                        <td>${movement_fields["order"]||""}</td>
+                        <td>${movement_fields["source"]||""}</td>
+                        <td>${movement_fields["destination"]||""}</td>
+                        </tr>`
+                    )
+                    location.reload();                                        
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            });            
+        });
+    });
+
+
+    $(document).ready(function(){
+
+    })
+
+</script>
+
+
+
+
+
+{% endblock %}
+
+

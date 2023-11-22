@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% extends 'my_app/base.html' %}
+{% block head %}
+<title>Regular Customer</title>
+{% endblock %}
+
+{% block body_block %}
+
+
+    <div class="container">
+        <p>Please Order a Product</p>
+        <form id="order_form" method="POST">
+            {% csrf_token %}
+            {{ order_form.as_p }}
+            <label for="maximum_quantity">Maximum Quantity</label>
+            <br>
+            <input class="form-control readonly" type="text" name="" id="maximum_quantity" readonly>
+            <br>
+            <input class="btn" type="submit" value="Create an Order" name="order_submit">
+        </form>
+        <br>
+        <br>
+    </div>
+    
+
+
+
+    {% if order_list %}
+           
+        <table id="order_info" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Order Sequence</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Order Date</th>
+                    <th>Source Warehouse</th>
+                    <th>Destination Warehouse</th>
+                </tr>
+            </thead>
+            {% for order in order_list %}
+            <tbody>
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.sequence }}</td>
+                    <td>{{ order.product }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.order_date | date:'Y-m-d' }}</td>
+                    <td>{{ order.source }}</td>
+                    <td>{{ order.destination }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+
+            <tfoot>
+                <tr>
+                    <th>ID</th>
+                    <th>Order Sequence</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Order Date</th>
+                    <th>Source Warehouse</th>
+                    <th>Destination Warehouse</th>
+                </tr>
+            </tfoot>
+        </table>
+    
+    {% endif %}
+
+{% endblock %}
+
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href = "{% static 'css/style.css' %}">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+{% endblock %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+{% block style %}
+
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand-registration" style="color:white" href="{% url 'my_app:index' %}">Home Page</a>      
+    </ul>
+</nav>
+
+    
+        
+            {% if registered %}
+            <div class="jumbotron">
+                <p class="registration">Thank You for Registering, Nice!</p>
+            </div>
+                
+            {% else %}
+                <div class="form-group">
+                    <br>
+                    <form action="{% url 'my_app:register' %}" method="POST">
+                        {% for field in user_form %}
+                            <label class="login-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                            {{ field }}
+                        {% endfor %}
+                        {% for field in user_profile_form %}
+                            <label class="login-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+                            {{ field }}
+                        {% endfor %}
+                        {% csrf_token %}
+                        <br>
+                        <input type="submit" class="btn btn-block" value="Register" style="width:400px">
+                    </form>
+                </div>
+                
+            {% endif %}        
+        
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+    
+  
+
+
+
+
+
+
+

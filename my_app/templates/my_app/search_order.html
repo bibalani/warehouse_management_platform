@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% extends 'my_app/base.html' %}
+{% block head %}
+<title>Search Order</title>
+{% endblock %}
+
+{% block body_block %}
+
+
+    <div class="container">
+        <p>You can search order</p>
+        <p>Please fill the form</p>
+        <form id="search_order_form" method="POST">
+            {% csrf_token %}
+            {{ search_order_form.as_p }}
+            <input class="btn" type="submit" value="Search Order" name="search_order_submit">
+        </form>
+        <br>
+        <br>
+    </div>
+    
+
+    
+    <div class="container">
+        <p>Search Order Result</p>        
+        <table id="search_order_info" class="table">
+            <thead>
+                <th>Order Sequence</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Order Date</th>
+                <th>Source Warehouse</th>
+                <th>Destination Warehouse</th>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+
+            </tbody>
+            
+
+            
+        </table>
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#search_order_form').submit(function(e){
+            e.preventDefault();
+
+            var serializedData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'my_app:search_order' %}",
+                data: serializedData,
+                success: function(response){
+                    $('#search_order_form').trigger('reset');
+                    // alert(response['ser_search_order_result'])
+                    // alert(response['ser_search_order_result'].length)
+
+                    for (var i=0; i<response['ser_search_order_result'].length;i++){
+                        var ser_search_order_result = JSON.parse(response['ser_search_order_result'][i]);
+                        // alert(ser_search_order_result)
+                        var fields = ser_search_order_result[0]['fields'];
+                        $('#search_order_info tbody').prepend(
+                            `<tr>
+                            <td>${fields["sequence"]||""}</td>
+                            <td>${fields["product"]||""}</td>
+                            <td>${fields["quantity"]||""}</td>
+                            <td>${fields["order_date"]||""}</td>
+                            <td>${fields["source"]||""}</td>
+                            <td>${fields["destination"]||""}</td>
+                            </tr>`
+                        
+                    )
+
+                    }    
+
+                    
+                },
+                error: function(response){
+                    console.log(response)
+                }
+            });
+            
+        });
+    });
+
+
+    $(document).ready(function(){
+
+
+    })
+
+</script>
+
+{% endblock %}

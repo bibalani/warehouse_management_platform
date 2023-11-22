@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href = "{% static 'css/style.css' %}">
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+{% endblock %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+{% block style %}
+
+{% endblock %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <ul class="navbar-nav mr-auto">
+            <a class="navbar-brand-login" style="color:white" href="{% url 'my_app:index' %}">Home Page</a>      
+        </ul>
+    </nav>
+    <form action="{% url 'my_app:user_login' %}" method="POST">
+        {% csrf_token %}
+        <br>
+        <br>
+        <br>
+        
+            <input type="text" id="form2Example1" class="form-control" name="username" style="width:400px"/>
+            <label class="form-label login-label" for="form2Example1">Username</label>
+        
+        
+            <input type="password" id="form2Example2" class="form-control" name="password" style="width:400px"/>
+            <label class="form-label login-label" for="form2Example2">Password</label>
+   
+        <button type="submit" class="btn btn-block mb-4" style="width:400px">Login</button>
+    </form>
+</body>
+</html>
+
+
+
+

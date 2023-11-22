@@ -1,0 +1,181 @@
+
+
+p, h1, h2 {
+    font-family: Arial, Arial, Arial;
+}
+
+
+table, th, td {
+    text-align: center;
+    vertical-align: middle; 
+    height: 20px;    
+}
+
+
+
+th{
+    color: white;
+    background: #18948e;
+    font-weight: normal;
+}
+
+
+table{
+    background-color: transparent;
+}
+
+
+
+.btn {
+    background-color: #18948e;
+    color: white;
+}
+
+
+
+
+
+
+#title {
+    color: white;
+    background: #18948e;
+    text-align: left;
+    margin-right: 0px;
+    font-family: Arial;
+  }
+  
+
+  
+
+  
+
+  
+  .row {
+    padding-left: 30px;
+    padding-right: 0px;
+  }
+  
+  .image-class {
+    padding-right: 0px;
+    width: 99%;
+  }
+  
+  .cta {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-family: Arial;
+    background: #c0c0c0;
+  }
+  
+  .cta h1 {
+    font-size: 1rem;
+  }
+  
+  #footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #18948e;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+  }
+  
+  .social-icon {
+    font-size: 1.5rem;
+  }
+  
+
+  
+.row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+
+  
+
+  
+.navbar-brand {
+    margin-right: 0px;
+  }
+
+.index_text{
+margin-left: 30px;
+}
+
+.login_index_text {
+  margin-left: 35px;
+
+}
+
+.navbar-brand-base {
+  margin-left: 20%;
+
+}
+/* .nav-link-1 {
+  margin-left: 10%;
+} */
+
+.navbar-brand-base {
+  display: inline-block;
+} 
+
+
+.navbar-brand-login {
+  margin-left: 18px;
+}
+
+.navbar-brand-registration {
+  margin-left: 60px;
+}
+
+/* .nav-item {
+  display: inline-block;
+} */
+
+/* .nav-link {
+  
+  margin-left: 10%;
+  padding-right: 0px;
+} */
+
+.form-control {
+  justify-content: center;
+  align-items: center;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+.btn-block{
+  color: white;
+  margin-right: auto;
+  margin-left: auto;
+  
+}
+
+.login-label {
+ 
+
+  margin-left: 439px;
+}
+
+
+.registration-label {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.registration {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+
+
+

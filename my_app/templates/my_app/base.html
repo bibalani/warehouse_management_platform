@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<link rel="stylesheet" href = "{% static 'css/style.css' %}">
+
+
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block head %}
+{% endblock %}
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>
+<link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel = "stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src = "https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src = "https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+<script src="{% static 'js/regular_customer.js' %}"></script>
+
+{% block style %}
+
+{% endblock %}
+
+
+
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="navbar-brand-base" style="color:white" href="{% url 'my_app:index_login' %}">Home Page</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin Page</a></li> -->
+                <li class="nav-item"><a class="nav-link" style="color:white" href="{% url 'my_app:search_order_view' %}">Search Order Page</a></li>
+                <li class="nav-item"><a class="nav-link" style="color:white" href="{% url 'my_app:search_movement_view' %}">Search Movement Page</a></li> 
+            </ul>
+
+            
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ user.username }} ({{ membership_type }}) 
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item"  href="{% url 'my_app:user_logout' %}">Logout</a>
+                  <a class="dropdown-item" href="#">Profile</a>
+                  <a class="dropdown-item" href="#">Help</a>
+                </div>
+            </div>    
+
+            <!-- <a class="dropdown-toggle" href="#">{{ user.username }}({{ membership_type }})</a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{% url 'my_app:user_logout' %}">Logout</a></li>
+                </ul> -->
+            
+
+            
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block body_block %}
+        
+        {% endblock %}
+    </div>
+
+{% block script %}
+{% endblock %}
+</body>
+</html>
+
+
